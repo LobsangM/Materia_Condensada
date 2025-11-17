@@ -1,0 +1,9 @@
+
+N: 20               # Número de partículas
+R: 200              # Radio del círculo
+epsilon: 1.0        # Profundidad del pozo de potencial Lennard-Jones
+sigma: 10.0         # Distancia característica del potencial
+kB_T: 1.0           # Energía térmica (k_B * T)
+step_size: 5.0      # Tamaño máximo del paso aleatorio
+max_steps: 5000     # Número máximo de pasos de Monte Carlo
+fps: 240            # Velocidad de la visualzaici[on]
