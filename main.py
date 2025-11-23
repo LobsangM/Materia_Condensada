@@ -20,6 +20,7 @@ def main():
 
     # Para nombrar la imagen final
     param_string = (
+        f"s{config['max_steps']}_"
         f"N{config['N']}_"
         f"R{config['R']}_"
         f"ε{str(config['epsilon']).replace('.', '-')}_"
