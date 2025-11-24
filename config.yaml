@@ -1,8 +1,11 @@
-N: 100
-R: 300
-epsilon: 1.0
-sigma: 10.0
-kB_T: 0.1          # <-- REDUCIDO: 10 veces menos energía térmica
-step_size: 1.0     # <-- REDUCIDO: Ahora es el 10% de sigma
-max_steps: 50000
+# N: 200
+N: 100 # ajustado a parámetros de Verlet
+# R: 120
+R: 10 # ajustado a parámetros de Verlet
+epsilon: 10.0
+# sigma: 5.0
+sigma: 1 # ajustado a parámetros de Verlet
+kB_T: 0.01
+step_size: 1.0  # 10% de sigma
+max_steps: 30000
 fps: 240
