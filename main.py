@@ -50,7 +50,8 @@ def main():
         "graficador.py", 
         positions_file, 
         param_string, 
-        str(config["R"])
+        str(config["R"]),
+        str(config["sigma"])
     ], check=True)
 
 if __name__ == "__main__":
