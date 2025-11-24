@@ -43,7 +43,7 @@ def main():
     
     print("Mostrando la gráfica... Cierra la ventana para terminar el programa.")
 
-    # 4. Mostrar la gráfica interactiva
+    plt.savefig("graficas_parametros_red/ultima_simulación.png", dpi=150, bbox_inches='tight')
     plt.show()
 
 if __name__ == "__main__":
