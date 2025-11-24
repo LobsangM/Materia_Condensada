@@ -20,6 +20,9 @@ class MonteCarloSimulation:
         self.positions = self._initialize_positions()
         self.energy = self.lj.total_energy(self.positions)
 
+        # Diccionario para guardar el PROMEDIO de la distancia mínima en cada intervalo
+        self.avg_min_dist_history = {}
+
     def _initialize_positions(self):
         """Genera posiciones iniciales aleatorias dentro del círculo."""
         positions = []
@@ -67,8 +70,24 @@ class MonteCarloSimulation:
                 acc_rate = accepted / step
                 scale = 1 + adapt_rate * (acc_rate - target_acceptance)
                 self.step_size *= scale
+            
+            # Cada 500 pasos, calcula y guarda los parámetros de la red
+            if step % 500 == 0:
+                distances = self.calculate_min_distances()
+                self.avg_min_dist_history[step] = np.mean(distances)
 
-        return accepted / self.max_steps
+        # Devuelve tanto la tasa de aceptación como el historial de parámetros
+        return (accepted / self.max_steps), self.avg_min_dist_history
+    
+    def calculate_min_distances(self):
+        """Calcula la distancia mínima a la partícula más cercana para cada partícula."""
+        min_distances = np.zeros(self.N)
+        for i in range(self.N):
+            diffs = self.positions - self.positions[i]
+            dist_sq = np.sum(diffs**2, axis=1)
+            dist_sq[i] = np.inf  # Ignora la distancia a sí misma
+            min_distances[i] = np.sqrt(np.min(dist_sq))
+        return min_distances
 
 def load_config(filename="config.yaml"):
     with open(filename, "r") as f:
