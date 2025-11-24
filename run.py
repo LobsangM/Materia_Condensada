@@ -51,9 +51,23 @@ class MonteCarloSimulation:
     def run(self):
         """Ejecuta toda la simulación."""
         accepted = 0
-        for _ in range(self.max_steps):
+        step = 0
+
+        # Parámetros de aceptación adaptativa
+        target_acceptance = 0.35
+        adapt_rate = 0.01
+
+        for step in range(self.max_steps):
+
             if self.step():
                 accepted += 1
+
+            # Cada 100 pasos ajustamos el step_size
+            if step % 100 == 0 and step > 0:
+                acc_rate = accepted / step
+                scale = 1 + adapt_rate * (acc_rate - target_acceptance)
+                self.step_size *= scale
+
         return accepted / self.max_steps
 
 def load_config(filename="config.yaml"):
